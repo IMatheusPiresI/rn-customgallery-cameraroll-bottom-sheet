@@ -1,28 +1,26 @@
 import React, {useCallback, useRef} from 'react';
 import {View, Button, StyleSheet} from 'react-native';
-import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
 import {BottomSheetGallery} from './components/BottomSheet';
 const App: React.FC = () => {
   // ref
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const bottomSheetModalRef = useRef<BottomSheet>(null);
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
+    bottomSheetModalRef.current?.snapToIndex(0);
   }, []);
 
   // renders
   return (
-    <BottomSheetModalProvider>
-      <View style={styles.container}>
-        <Button
-          onPress={handlePresentModalPress}
-          title="Present Modal"
-          color="white"
-        />
-        <BottomSheetGallery ref={bottomSheetModalRef} />
-      </View>
-    </BottomSheetModalProvider>
+    <View style={styles.container}>
+      <Button
+        onPress={handlePresentModalPress}
+        title="Present Modal"
+        color="white"
+      />
+      <BottomSheetGallery ref={bottomSheetModalRef} />
+    </View>
   );
 };
 
